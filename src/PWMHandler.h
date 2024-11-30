@@ -15,6 +15,9 @@ public:
     // setter
     void setDutyCycle(uint8_t dutyCycle);
 
+    void setState(bool state);
+    void updateModulation();
+
 private:
     int pin_;
     unsigned long frequency_;
@@ -27,10 +30,11 @@ private:
 
     // for the timer
     unsigned long currentTime_;
+    unsigned long pastTime_;
     unsigned long oldTime_;
 
     bool state_ = false;
-    bool stateHL_;
+    bool stateHL_ = false;
 
     void calcDutyCycle();
 

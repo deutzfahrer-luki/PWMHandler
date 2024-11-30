@@ -1,5 +1,3 @@
-// Example.cpp
-
 #include "PWMHandler.h"
 
 PWMHandler::PWMHandler(uint8_t pin) : pin_(pin), frequency_(800L)
@@ -13,9 +11,10 @@ PWMHandler::PWMHandler(uint8_t pin, long frequency) : PWMHandler(pin)
     periodDuration_ = (1.0 / frequency_) * 1e6;
 }
 
+/* --------------- SETTER METHODES --------------- */
 void PWMHandler::setDutyCycle(uint8_t dutyCycle)
 {
-    if (dutyCycle > 0 && dutyCycle <= 100)
+    if (dutyCycle > 0 && dutyCycle < 100)
     {
         dutyCycle_ = dutyCycle;
         this->calcDutyCycle();
@@ -24,11 +23,37 @@ void PWMHandler::setDutyCycle(uint8_t dutyCycle)
         Serial.println("Error dutyCyle setter");
 }
 
+/* --------------- CALC METHODES --------------- */
 void PWMHandler::calcDutyCycle()
 {
-    this->impulseDuration_ = periodDuration_ * dutyCycle_ / 100;
-    this->breakDuration_ = periodDuration_ - impulseDuration_;
+    this->breakDuration_ = periodDuration_ * dutyCycle_ / 100;
+    this->impulseDuration_ = periodDuration_ - breakDuration_;
     // this->printDuration();
+}
+
+/* --------------- HARDWARE METHODES --------------- */
+void PWMHandler::setState(bool state)
+{
+    digitalWrite(this->pin_, state);
+}
+
+void PWMHandler::updateModulation()
+{
+    currentTime_ = micros();
+    pastTime_ = currentTime_ - oldTime_;
+
+    if (!stateHL_ && pastTime_ >= impulseDuration_)
+    {
+        stateHL_ = HIGH;
+        setState(stateHL_);
+        oldTime_ = currentTime_;
+    }
+    else if (stateHL_ && pastTime_ >= breakDuration_)
+    {
+        stateHL_ = LOW;
+        setState(stateHL_);
+        oldTime_ = currentTime_;
+    }
 }
 
 /* --------------- PRINTS METHODES --------------- */
