@@ -1,13 +1,23 @@
 #include <Arduino.h>
-#include <ExampleLib.h>
+#include <PWMHandler.h>
 
-ExampleLib EX(1);
+#define PIN 32
+#define FREQUENZY 800
 
-void setup() {
+PWMHandler Pin(PIN, FREQUENZY);
+
+uint8_t pwmValue = 25;
+
+void setup()
+{
   Serial.begin(115200);
-  EX.init();
+  Serial.println("Hallo Welt");
 }
 
-void loop() {
+void loop()
+{
+  Pin.setDutyCycle(pwmValue);
+  Pin.printDuration();
 
+  delay(100000);
 }
