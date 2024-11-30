@@ -1,8 +1,8 @@
 {
-  "name": "ExampleLib",
+  "name": "PWMHandler",
   "version": "1.0.0",
-  "description": "ExampleLib",
-  "keywords": ["example"],
+  "description": "PWMHandler",
+  "keywords": ["PWM"],
   "authors": [
       {
           "name": "Lukas Koeppl",
@@ -14,6 +14,6 @@
   "examples": "examples/*.cpp",
   "repository": {
       "type": "git",
-      "url": "https://github.com/deutzfahrer-luki/ExampleLib.git"
+      "url": "https://github.com/deutzfahrer-luki/PWMHandler.git"
   }
 }
