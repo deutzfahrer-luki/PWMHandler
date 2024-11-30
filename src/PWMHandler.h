@@ -3,28 +3,27 @@
 #define PWMHANDLER_H
 
 #include <Arduino.h> // falls du Arduino-Funktionen benutzt
-
-#define SDBS_CALC true
-
 class PWMHandler
 {
 public:
-    PWMHandler(uint8_t Pin);
-    PWMHandler(uint8_t Pin, long frequency);
+    PWMHandler(uint8_t Pin, unsigned long periodDuration_us);
 
     // setter
     void setDutyCycle(uint8_t dutyCycle);
 
-    void setState(bool state);
+    // print alll durations
+    void printDuration();
+
+    // update the pwm modulation
     void updateModulation();
 
 private:
     int pin_;
-    unsigned long frequency_;
-    uint8_t dutyCycle_;
+    float dutyCycle_;
+    unsigned long periodDuration_ = 0;
 
     // rechnen
-    unsigned long periodDuration_ = 0;
+    unsigned long frequency_;
     unsigned long impulseDuration_ = 0;
     unsigned long breakDuration_ = 0;
 
@@ -35,11 +34,8 @@ private:
 
     bool state_ = false;
     bool stateHL_ = false;
-
+    void setState(bool state);
     void calcDutyCycle();
-
-public:
-    void printDuration();
 };
 
 #endif // PWMHANDLER_H

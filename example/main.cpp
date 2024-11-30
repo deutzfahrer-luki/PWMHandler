@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include <PWMHandler.h>
 
-#define PIN 32
-#define FREQUENZY 800
+#define PIN 33
+#define PERIOD_DURATION 20000
 
-PWMHandler Pin(PIN, FREQUENZY);
+PWMHandler Pin(PIN, PERIOD_DURATION);
 
 uint8_t pwmValue = 20;
 
@@ -37,6 +37,6 @@ void setup()
 void loop()
 {
   updatePWMFromSerial();
-
   Pin.updateModulation();
+
 }

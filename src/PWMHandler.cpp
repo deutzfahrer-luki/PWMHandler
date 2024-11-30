@@ -1,14 +1,11 @@
 #include "PWMHandler.h"
 
-PWMHandler::PWMHandler(uint8_t pin) : pin_(pin), frequency_(800L)
+/* --------------- CONSTRUCTOR --------------- */
+PWMHandler::PWMHandler(uint8_t pin, unsigned long periodDuration_us) : pin_(pin)
 {
     pinMode(pin_, OUTPUT);
-}
-
-PWMHandler::PWMHandler(uint8_t pin, long frequency) : PWMHandler(pin)
-{
-    (frequency) ? frequency_ = frequency : Serial.println("ERROR frequency");
-    periodDuration_ = (1.0 / frequency_) * 1e6;
+    (periodDuration_us) ? periodDuration_ = periodDuration_us : Serial.println("ERROR frequency");
+    frequency_ = 1e6 / periodDuration_;
 }
 
 /* --------------- SETTER METHODES --------------- */
@@ -16,7 +13,7 @@ void PWMHandler::setDutyCycle(uint8_t dutyCycle)
 {
     if (dutyCycle > 0 && dutyCycle < 100)
     {
-        dutyCycle_ = dutyCycle;
+        dutyCycle_ = dutyCycle+0.5;
         this->calcDutyCycle();
     }
     else
@@ -60,9 +57,11 @@ void PWMHandler::updateModulation()
 void PWMHandler::printDuration()
 {
     Serial.print("periodDuration_: ");
-    Serial.println(periodDuration_);
+    Serial.println(this->periodDuration_);
+    Serial.print("frequency_ : ");
+    Serial.println(this->frequency_);
     Serial.print("dutyCycle_: ");
-    Serial.println(dutyCycle_);
+    Serial.println(this->dutyCycle_);
     Serial.print("impulseDuration_: ");
     Serial.println(this->impulseDuration_);
     Serial.print("breakDuration_: ");
