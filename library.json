@@ -1,0 +1,19 @@
+{
+  "name": "ExampleLib",
+  "version": "1.0.0",
+  "description": "ExampleLib",
+  "keywords": ["example"],
+  "authors": [
+      {
+          "name": "Lukas Koeppl",
+          "email": "traktor.koeppl@gmail.com"
+      }
+  ],
+  "license": "MIT",
+  "frameworks": ["arduino"],
+  "examples": "examples/*.cpp",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/deutzfahrer-luki/ExampleLib.git"
+  }
+}
