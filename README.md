@@ -89,6 +89,7 @@ void loop() {
 This code is licensed under the MIT License. See the LICENSE file for more details.
 
 ## Including in your project:
+add this to you platformio.ini file:
 ```bash
 lib_deps = https://github.com/deutzfahrer-luki/PWMHandler.git
 ```
