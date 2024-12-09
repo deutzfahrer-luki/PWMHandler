@@ -3,13 +3,14 @@
 #define PWMHANDLER_H
 
 #include <Arduino.h> // falls du Arduino-Funktionen benutzt
+#define OFFSET 0.12
 class PWMHandler
 {
 public:
     PWMHandler(uint8_t Pin, unsigned long periodDuration_us);
 
     // setter
-    void setDutyCycle(uint8_t dutyCycle);
+    void setDutyCycle(float dutyCycle);
 
     // print alll durations
     void printDuration();

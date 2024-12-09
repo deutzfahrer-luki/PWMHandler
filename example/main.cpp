@@ -6,13 +6,13 @@
 
 PWMHandler Pin(PIN, PERIOD_DURATION);
 
-uint8_t pwmValue = 20;
+float pwmValue = 20;
 
 void updatePWMFromSerial()
 {
   if (Serial.available() > 0)
   {
-    int newPwmValue = Serial.parseInt();
+    float newPwmValue = Serial.parseFloat();
     if (newPwmValue >= 0 && newPwmValue <= 100)
     {
       pwmValue = newPwmValue;
@@ -38,5 +38,4 @@ void loop()
 {
   updatePWMFromSerial();
   Pin.updateModulation();
-
 }

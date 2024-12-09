@@ -9,11 +9,11 @@ PWMHandler::PWMHandler(uint8_t pin, unsigned long periodDuration_us) : pin_(pin)
 }
 
 /* --------------- SETTER METHODES --------------- */
-void PWMHandler::setDutyCycle(uint8_t dutyCycle)
+void PWMHandler::setDutyCycle(float dutyCycle)
 {
     if (dutyCycle > 0 && dutyCycle < 100)
     {
-        dutyCycle_ = dutyCycle+0.5;
+        dutyCycle_ = dutyCycle;
         this->calcDutyCycle();
     }
     else
@@ -23,7 +23,7 @@ void PWMHandler::setDutyCycle(uint8_t dutyCycle)
 /* --------------- CALC METHODES --------------- */
 void PWMHandler::calcDutyCycle()
 {
-    this->breakDuration_ = periodDuration_ * dutyCycle_ / 100;
+    this->breakDuration_ = periodDuration_ * (dutyCycle_+OFFSET) / 100;
     this->impulseDuration_ = periodDuration_ - breakDuration_;
     // this->printDuration();
 }
