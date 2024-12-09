@@ -18,6 +18,9 @@ public:
     // update the pwm modulation
     void updateModulation();
 
+    // get Duty Cycle
+    float getDutyCycle() { return this->dutyCycle_; }
+
 private:
     int pin_;
     float dutyCycle_;
